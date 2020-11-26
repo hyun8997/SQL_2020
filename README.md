@@ -1,5 +1,6 @@
 # SQL_2020
 # Using 'Database 11g Enterprise/Standard Editions' and 'Java SE 8 JDK'
+# Using 'SQL Developer 19.2.1'
 # These files are commented by Korean.
 
  functionEx.sql is about Single Row Functions and DML Select; 
