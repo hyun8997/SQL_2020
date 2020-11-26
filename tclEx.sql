@@ -1,0 +1,110 @@
+-- [TCL]
+-- 트랜잭션을 DML문의 모음이라고도 함.
+-- COMMIT, ROLLBACK등 명시적 TCL이고 나머지 항목들은 암시적 제어
+
+SELECT * FROM DEPT;     -- 트랜잭션 시작
+
+INSERT INTO DEPT            -- 다른계정에서는 커밋전의 조작 결과를 못 봄
+VALUES (50, 'A','B');
+
+DELETE FROM DEPT         -- 변경사항 버퍼에 저장, 복구 가능
+WHERE DEPTNO = 50;
+
+SELECT * FROM DEPT;
+
+COMMIT;                             -- 버퍼에 있던 조작 결과를 DB에 저장
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
