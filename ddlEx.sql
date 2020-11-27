@@ -161,6 +161,8 @@ SELECT * FROM USER_TAB_COMMENTS;
 --> 이 모든 조건들은 테이블을 설계할 때 정해놔야 한다. 중요!
 ----------------------------------------------------------------------------------------------------------------------------------
 -- + 제약 조건 정의
+-- (권장) 제약명을 생략하면 SYS_C숫자 형으로 랜덤으로 정해지므로 직접 정하는걸 권장함.
+
 -- 1) 집합레벨 정의 방식
 -- : 컬럼명 DATATYPE [ CONSTRAINT 제약명 ] 제약 종류
 
@@ -188,4 +190,277 @@ CREATE TABLE EMP1
  CONSTRAINT EMP1_DEPTNO_FK FOREIGN KEY (DEPTNO) REFERENCES DEPT1(DEPTNO)); -- 레퍼런스를 바로 거는건 권장하진 않는다.
 
 DESC EMP1;  -- PRIMARY KEY랑 NOT NULL 제약건거에 NOT NULL걸린거 볼수 있음
+
+INSERT INTO DEPT1
+VALUES (1, '영업', '서울');
+                                                                 
+INSERT INTO DEPT1
+VALUES (1, '회계', '부산');  -- violated(위배), 유니크하지 못하다. => 조건을 만족하지 않아서 데이터 자체를 업데이트 하지 않음
+
+INSERT INTO DEPT1
+VALUES (2, '회계', '부산');  -- 정상 삽입
+
+INSERT INTO EMP1
+VALUES (1111, 'HONG', 3000, 3);  -- violated, (SCOTT.EMP1_DEPTNO_PK)제약X: parent key not found => 현재 DEPT1에 3번 부서가 없음
+
+INSERT INTO EMP1
+VALUES (1111, 'HONG', 3000, 1);  -- 정상 삽입
+
+INSERT INTO EMP1
+VALUES (2222, 'YU', 6000, 2);  -- violated, (SCOTT.EMP1_SAL_CK)의 500~5000 외의 SAL이라서
+
+INSERT INTO DEPT1
+VALUES (3, '회계', '대전');  -- violated, UNIQUE 조건에 '회계' 중복
+
+-- DEPT1 테이블 LOC 컬럼에 UNIQUE 제약을 부여, 추가
+ALTER TABLE DEPT1 
+ADD CONSTRAINT DEPT1_LOC_UQ UNIQUE(LOC);
+
+INSERT INTO DEPT1
+VALUES (3, '리서치', '부산');  -- violated, DEPT1_LOC_UQ 조건(UNIQUE)에 '부산' 중복 
+
+-- DESC: 컬럼명, 널?, 데이터유형 만 보여줌, 데이터 제약 볼 수 없음
+-- 제약 조건 조회 : DATA DICTIONARY를 통해 조회
+DESC USER_CONSTRAINTS;  
+
+SELECT OWNER, CONSTRAINT_NAME, CONSTRAINT_TYPE, TABLE_NAME, SEARCH_CONDITION
+FROM USER_CONSTRAINTS
+WHERE TABLE_NAME IN (EMP1, DEPT1);   -- 방금 만든 테이블들의 제약 조건 조회
+
+-- 제약조건 삭제
+ALTER TABLE DEPT1
+DROP CONSTRAINT DEPT1_LOC_UQ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
