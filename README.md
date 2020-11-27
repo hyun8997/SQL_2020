@@ -11,3 +11,4 @@
  dmlEx.sql is about DML of SQL without Select;
  ddlEx.sql is about DDL of SQL;
  tclEx.sql is about TCL examples;
+ dclEx.sql is about DCL of SQL PLUS;
