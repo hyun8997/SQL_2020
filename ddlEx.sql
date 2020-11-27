@@ -159,22 +159,24 @@ SELECT * FROM USER_TAB_COMMENTS;
 -- DEPTNO : NULL(X), 중복 X		- PRIMARY KEY
 -- DNAME : 중복 X, 고유			- UNIQUE
 --> 이 모든 조건들은 테이블을 설계할 때 정해놔야 한다. 중요!
+----------------------------------------------------------------------------------------------------------------------------------
+-- + 제약 조건 정의
+-- 1) 집합레벨 정의 방식
+-- : 컬럼명 DATATYPE [ CONSTRAINT 제약명 ] 제약 종류
 
+CREATE TABLE DEPT1
+(DEPTNO NUMBER(2) PRIMARY KEY,
+ DNAME VARCHAR2(20) UNIQUE,
+ LOC VARCHAR2(20));  -- LOC는 제약조건 딱히 필요 없어서 안씀
 
+DESC DEPT1;  -- NOT NULL DEPTNO에 걸려있는것 확인
 
+-- 2) 테이블 레벨 정의 방식
+-- : 컬럼명 DATATYPE,
+--   컬럼명 DATATYPE,
+--   컬럼명 DATATYPE,
+--   CONSTRAINT 제약명 제약종류 (컬럼명),
+--   CONSTRAINT 제약명 제약종류 (컬럼명),
+--   CONSTRAINT 제약명 제약종류 (컬럼명)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+CREATE TABLE EMP1
