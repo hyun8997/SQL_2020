@@ -144,7 +144,7 @@ SELECT * FROM USER_TAB_COMMENTS;
 -- 2. 무결성
 -- : 무결성을 만족시키려면 DDL, DML 문을 사용할 때 테이블 조건을 만족할 때만 실행될 수 있도록 하면 됨
 -- 제약조건: 
---	1) Primary key: 필수 권장사항
+--	1) Primary key: 필수 권장사항, 전체 컬럼중에 하나만 가능, 2개를 조합해서 PRIMARYKEY 처럼 쓸수는 있다
 --	2) NOT NULL
 --	3) CHECK
 --	4) UNIQUE
@@ -180,3 +180,12 @@ DESC DEPT1;  -- NOT NULL DEPTNO에 걸려있는것 확인
 --   CONSTRAINT 제약명 제약종류 (컬럼명)
 
 CREATE TABLE EMP1
+(EMPNO NUMBER(4) CONSTRAINT EMP1_EMPNO_PK PRIMARY KEY,  -- 이름까지 적어주는게 권장 사항
+ ENAME VARCHAR2(20) NOT NULL,
+ SAL NUMBER(7, 2),
+ DEPTNO NUMBER(2),
+ CONSTRAINT EMP1_SAL_CK CHECK (SAL BETWEEN 500 AND 5000),
+ CONSTRAINT EMP1_DEPTNO_FK FOREIGN KEY (DEPTNO) REFERENCES DEPT1(DEPTNO)); -- 레퍼런스를 바로 거는건 권장하진 않는다.
+
+DESC EMP1;  -- PRIMARY KEY랑 NOT NULL 제약건거에 NOT NULL걸린거 볼수 있음
+
