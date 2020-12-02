@@ -1,0 +1,57 @@
+
+1. 사원의 사번, 이름, 봉급, 입사일?
+
+SQL> select empno, ename, sal, hiredate
+  2  from emp;
+
+2. 사원의 사번, 이름, 연봉(월급*12)?	
+
+SQL> select empno, ename, sal*12
+  2  from emp;
+
+3. 부서가 10번인 사원의 사번, 이름, 봉급, 사번을 구하시오
+
+ SQL> select empno, ename, sal, deptno
+  2  from emp
+  3  where deptno = 10;
+
+4. 입사일이 '81/02/20'일인 사원의 사번, 이름, 봉급, 커미션, 부서번호 ?
+
+SQL> select empno, ename, sal, comm, deptno
+  2  from emp
+  3  where hiredate = '81/02/20';
+
+5. 이름이 SCOTT 이거나 BLAKE인 사원의 사번, 이름, job ?
+
+SQL> select empno, ename, job
+  2  from emp
+  3  where ename = 'SCOTT' or ename = 'BLAKE';
+
+6 . job이 SALESMAN인 사원의 사번, comm, 봉급 ?
+
+SQL> select empno, comm, sal
+  2  from emp
+  3  where job = 'SALESMAN';
+
+7. 부서위치가 dallas인 사원의 부서번호, 부서명, 부서위치 ?
+
+SQL> select deptno, dname, loc
+  2  from dept
+  3  where loc = 'DALLAS';
+
+8. 봉급이 2000~3000 사이인 사원의 사번, 이름, 봉급 ?
+
+SQL> select empno, ename, sal
+  2  from emp
+  3  where sal >=2000 and sal <=3000;
+
+9.  커미션이 800 ~ 1400 인 사원의 사번, 이름, comm ?
+SQL> select empno, ename, comm
+  2  from emp
+  3  where comm = 800 or comm = 1400;
+
+10. 부서번호가 10이고 job이 CLERK, 입사일이 82/01/01 ~ 82/12/31 모든 사원의 정보 ?
+
+SQL> select *
+  2  from emp
+  3  where deptno = 10 and job = 'CLERK' and hiredate >= '82/01/01' and hiredate <= '82/12/31';
