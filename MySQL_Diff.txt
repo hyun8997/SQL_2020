@@ -1,0 +1,13 @@
+MySQL에서 하루 더하는거 DATE_ADD([시간], INTERVAL [값] [단위])
+# Write your MySQL query statement below
+select W1.id
+from Weather W1 join Weather W2
+where W1.recordDate = DATE_ADD(W2.recordDate, INTERVAL 1 DAY)
+    and W1.Temperature > W2.Temperature;
+---------------------------------------------------------------------------------
+Swap할 때  case 사용 고려
+# Write your MySQL query statement below
+update salary 
+set sex = CASE WHEN sex='f' THEN 'm' 
+                WHEN sex='m' THEN 'f'
+                else sex END
